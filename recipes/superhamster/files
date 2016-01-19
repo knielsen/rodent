@@ -1,0 +1,55 @@
+etc	d	2755	0	0
+etc/avahi	d	2755	0	0
+etc/avahi/avahi-daemon.conf	f	644	0	0	fddb6db459c214d02439d5390c1ece78ab294f20
+etc/avahi/services	d	2755	0	0
+etc/avahi/services/sftp-ssh.service	f	644	0	0	0e3d401f26bab23a6346046dba4d80efb4199b9c
+etc/avahi/services/ssh.service	f	644	0	0	8997de663940d041b4a1b6c03efbbe22c1973829
+etc/group	f	644	0	0	59d83eff07078b0bae3e99fa75691822c2134167
+etc/hostname	f	644	0	0	ab672f7b5b6d7e44dc8754bfa832db6798dfc174
+etc/inputrc	f	644	0	0	b0a8ef0653b64f2f1726d5d9a20d982dc56a66c3
+etc/machine-id	f	644	0	0	78274af1ad1a7b18fc342bbe7b8e2a03c4e3a6aa
+etc/nsswitch.conf	f	644	0	0	edaa0c78b93dc1a558a06ba72842c331f639d4eb
+etc/pam.d	d	2755	0	0
+etc/pam.d/other	f	644	0	0	232214372ae88ad0eef8464daa5425af7045f92e
+etc/pam.d/system-auth	f	644	0	0	13f5c3cc36a074ccdcbe4783ced1245f92d55d06
+etc/pam.d/systemd-user	f	644	0	0	78b772d94ac80ce1383a88cd726e6f1d6aa1d357
+etc/passwd	f	644	0	0	00231e24f0f811f9ee5b16182beef33bd1e4992d
+etc/profile	f	644	0	0	cfe7eb55967d074b48d5011444ae1fb3f64f35fe
+etc/resolv.conf	l	777	0	0	/run/systemd/resolve/resolv.conf
+etc/shadow	f	644	0	0	116293a535835fa0cb9d804b99ba0ddd8f82900c
+etc/ssh	d	2755	0	0
+etc/ssh/moduli	f	644	0	0	b129c9028a499eeb8efcb677f275571fb285c2b2
+etc/ssh/ssh_host_ed25519_key	f	644	0	0	9abbc5cfe3845385860fdd3a4a7239d2ebefd6ed
+etc/ssh/ssh_host_ed25519_key.pub	f	644	0	0	5f29a73ff4acd6aaef97a1bf8f4aa47662c18c21
+etc/ssh/sshd_config	f	644	0	0	ecfacd175301a1345ea63685457c019e00dadec5
+etc/systemd	d	2755	0	0
+etc/systemd/journald.conf	f	644	0	0	cb8ffb6314d9171c90b606a482cba12c004be317
+etc/systemd/network	d	2755	0	0
+etc/systemd/network/eth0.network	f	644	0	0	dd8c9526d9e35a46190dbefff3ba3abe4ad6a182
+etc/systemd/network/usb0.network	f	644	0	0	212658ba311c2adc023a6fb444e08962c818d8d9
+etc/systemd/network/usb1.network	f	644	0	0	80c6b93f935a5bd9aecf32017261a67a628d4c51
+etc/systemd/scripts	d	2755	0	0
+etc/systemd/scripts/multigadget	f	755	0	0	0176c80ef13e6473d7edb51dfd3808710a93d824
+etc/systemd/system	d	2755	0	0
+etc/systemd/system/boot.automount	f	644	0	0	35f1bfd1385d4c72497f7cbdbd199f2ae8d6272d
+etc/systemd/system/boot.mount	f	644	0	0	d656a884db13fd114cdd33a106641d2ccecf0f6e
+etc/systemd/system/etc-overlay-pre.service	f	644	0	0	df02284013f8a72bb6a2ba74b3ce18c2c7a3ff4a
+etc/systemd/system/etc.mount	f	644	0	0	e584b15817090a7d97d708bd0eb82fb721f0cc76
+etc/systemd/system/local-fs.target.requires	d	2755	0	0
+etc/systemd/system/local-fs.target.requires/boot.automount	l	777	0	0	../boot.automount
+etc/systemd/system/multi-user.target.wants	d	2755	0	0
+etc/systemd/system/multi-user.target.wants/avahi-daemon.service	l	777	0	0	/usr/lib/systemd/system/avahi-daemon.service
+etc/systemd/system/multi-user.target.wants/multigadget.service	l	777	0	0	../multigadget.service
+etc/systemd/system/multi-user.target.wants/sshd.service	l	777	0	0	/usr/lib/systemd/system/sshd.service
+etc/systemd/system/multi-user.target.wants/systemd-networkd.service	l	777	0	0	/usr/lib/systemd/system/systemd-networkd.service
+etc/systemd/system/multi-user.target.wants/systemd-resolved.service	l	777	0	0	/usr/lib/systemd/system/systemd-resolved.service
+etc/systemd/system/multigadget.service	f	644	0	0	e43c358c482474767cec779d29675ebcd8c30b63
+etc/systemd/system/sockets.target.wants	d	2755	0	0
+etc/systemd/system/sockets.target.wants/systemd-networkd.socket	l	777	0	0	/usr/lib/systemd/system/systemd-networkd.socket
+etc/tmpfiles.d	d	2755	0	0
+etc/tmpfiles.d/leds.conf	f	644	0	0	0d620716873366d6d962434878443c14201c1b53
+etc/vimrc	f	644	0	0	300caffa3d73aa5393dafaf57c78a6bf2e862d1d
+init	l	777	0	0	/usr/lib/systemd/systemd
+root	d	2755	0	0
+root/.bash_profile	f	644	0	0	b84789e820ea2933c382fce6d9cf5ef00efb02c3
+root/.bashrc	f	644	0	0	5596327a2d1e684c125e61526370af9debe07b39
