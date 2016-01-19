@@ -22,7 +22,6 @@ config-lem() {
 build() {
   # Out-of-source build fails on luaconfig.h.in dependency for some reason...
   cd "../lem-$version"
-  #  --with-sysroot="$SYSROOT" \
   ./configure \
     --host=$HOST \
     --prefix=/usr
