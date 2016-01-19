@@ -25,7 +25,6 @@ prepare() {
 build() {
   cmake \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=RelWithDbgInfo \
     -DCMAKE_SYSTEM_NAME=Linux \
     -DCMAKE_C_COMPILER="$HOST-gcc" \
     -DCMAKE_FIND_ROOT_PATH="$SYSROOT" \
