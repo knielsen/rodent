@@ -1,0 +1,11 @@
+--- mariadb-connector-c-8b3099b319dbd198f6d6f1bbb6ae6784d7b1f1fe/libmariadb/my_stmt.c.orig	2016-01-19 19:39:32.274262597 +0100
++++ mariadb-connector-c-8b3099b319dbd198f6d6f1bbb6ae6784d7b1f1fe/libmariadb/my_stmt.c	2016-01-19 19:40:06.486102018 +0100
+@@ -408,7 +408,7 @@
+     return packet + 3;
+   }
+   *packet++ = 254;
+-  int8store(packet, length);
++  int8store(packet, (my_ulonglong)length);
+   return packet + 8;
+ }
+ 

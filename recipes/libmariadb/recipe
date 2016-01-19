@@ -1,0 +1,45 @@
+version=8b3099b319dbd198f6d6f1bbb6ae6784d7b1f1fe
+release=1
+sources=("https://github.com/MariaDB/mariadb-connector-c/archive/${version}.tar.gz")
+sha1sum=('c22cbd5b792c88e2547d52ad2a086f0aa78666e5')
+makedepends=('glibc-devel' 'libssl-devel')
+
+config-libmariadb() {
+  description="mariadb-connector-c stand-alone LGPL'ed MariaDB/MySQL client library"
+  depends=('glibc')
+  devdepends=('glibc-devel' "libmariadb=$version-$release")
+  files=('usr/lib/libmariadb.so.*' 'usr/lib/plugin/*.so')
+  devfiles=(
+    'usr/include/mariadb/**'
+    'usr/lib/lib*.a'
+    'usr/lib/lib*.so'
+    'usr/bin/mariadb_config' 'usr/bin/mariadb_client_plugin_info'
+  )
+}
+
+prepare() {
+  cd "mariadb-connector-c-$version"
+  patch -Np1 -i ../32-bit-shift.patch 
+}
+
+build() {
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=RelWithDbgInfo \
+    -DCMAKE_SYSTEM_NAME=Linux \
+    -DCMAKE_C_COMPILER="$HOST-gcc" \
+    -DCMAKE_FIND_ROOT_PATH="$SYSROOT" \
+    -DCMAKE_BUILD_TYPE=Release \
+    "../mariadb-connector-c-$version/"
+
+  make
+}
+
+package() {
+  #unset MAKEFLAGS
+  make DESTDIR="$pkgdir" install
+
+  mv "$pkgdir"/usr/lib/mariadb/* "$pkgdir"/usr/lib/
+}
+
+# vim: set ft=sh ts=2 sw=2 et:

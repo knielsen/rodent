@@ -35,6 +35,7 @@ config-superhamster() {
     'pam_unix' 'pam_nologin'
     'avahi-browse' 'libnss_mdns'
     'dosfstools-fsck'
+    'libmariadb'
   )
   files=('**')
 }
