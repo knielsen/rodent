@@ -15,7 +15,7 @@ config-lem() {
   )
   devfiles=(
     'usr/include/lem/**'
-    'usr/lib/pkgconfig'
+    'usr/lib/pkgconfig/**'
   )
 }
 

@@ -1,0 +1,26 @@
+version=master
+release=1
+sources=("https://github.com/knielsen/lem-mariadb/archive/${version}.tar.gz")
+sha1sum=('84b0e9bf4f47e6e56148c3002de8a2d0e5139662')
+makedepends=('lem-devel' 'libmariadb-devel')
+
+config-lem-mariadb() {
+  description="Lua Event Machine"
+  depends=('lem' 'libmariadb')
+  files=(
+    'usr/lib/lua/*/lem/mariadb.so' 'usr/share/lua/*/lem/mariadb/queued.lua'
+  )
+}
+
+build() {
+  cd "../lem-mariadb-$version"
+  make CC="$HOST-gcc -std=gnu99" MARIADB_CONFIG="true" \
+    CFLAGS="-O2 -I$SYSROOT/usr/include/mariadb -I$SYSROOT/usr/include/mariadb/mysql -lmariadb -lpthread -ldl -lm -lssl -lcrypto"
+}
+
+package() {
+  cd "../lem-mariadb-$version"
+  make DESTDIR="$pkgdir" MARIADB_CONFIG="true" install
+}
+
+# vim: set ft=sh ts=2 sw=2 et:

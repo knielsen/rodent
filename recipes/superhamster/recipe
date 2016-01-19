@@ -37,6 +37,7 @@ config-superhamster() {
     'dosfstools-fsck'
     'lem'
     'libmariadb'
+    'lem-mariadb'
   )
   files=('**')
 }

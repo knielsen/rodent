@@ -2,12 +2,13 @@ version=8b3099b319dbd198f6d6f1bbb6ae6784d7b1f1fe
 release=1
 sources=("https://github.com/MariaDB/mariadb-connector-c/archive/${version}.tar.gz")
 sha1sum=('c22cbd5b792c88e2547d52ad2a086f0aa78666e5')
-makedepends=('glibc-devel' 'libssl-devel')
+makedepends=('glibc-devel' 'libssl-devel' 'libcrypto-devel' 'libcurl-devel')
 
 config-libmariadb() {
   description="mariadb-connector-c stand-alone LGPL'ed MariaDB/MySQL client library"
-  depends=('glibc')
-  devdepends=('glibc-devel' "libmariadb=$version-$release")
+  depends=('glibc' 'libssl' 'libcrypto' 'libcurl')
+  devdepends=('glibc-devel' 'libssl-devel' 'libcrypto-devel' 'libcurl-devel'
+    "libmariadb=$version-$release")
   files=('usr/lib/libmariadb.so.*' 'usr/lib/plugin/*.so')
   devfiles=(
     'usr/include/mariadb/**'
