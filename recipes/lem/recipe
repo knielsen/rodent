@@ -1,0 +1,39 @@
+version=80f8678c55197b62872e90920fae3c2e72aff4fc
+release=1
+sources=("https://github.com/esmil/lem/archive/${version}.tar.gz")
+sha1sum=('7405d836e671058f734cb6fece039f092d45e6cc')
+makedepends=('glibc-devel')
+
+config-lem() {
+  description="Lua Event Machine"
+  depends=('glibc')
+  devdepends=('glibc-devel' "lem=$version-$release")
+  files=(
+    'usr/bin/lem'
+    'usr/share/lua/**'
+    'usr/lib/lua/*/lem/**'
+  )
+  devfiles=(
+    'usr/include/lem/**'
+    'usr/lib/pkgconfig'
+  )
+}
+
+build() {
+  # Out-of-source build fails on luaconfig.h.in dependency for some reason...
+  cd "../lem-$version"
+  #  --with-sysroot="$SYSROOT" \
+  ./configure \
+    --host=$HOST \
+    --prefix=/usr
+
+  make
+}
+
+package() {
+  cd "../lem-$version"
+  #unset MAKEFLAGS
+  make DESTDIR="$pkgdir" install
+}
+
+# vim: set ft=sh ts=2 sw=2 et:
