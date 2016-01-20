@@ -1,0 +1,26 @@
+diff --git a/config.h.cmake b/config.h.cmake
+index 4030673..70b7518 100644
+--- a/config.h.cmake
++++ b/config.h.cmake
+@@ -297,7 +297,7 @@
+ #cmakedefine HAVE_THR_YIELD 1
+ #cmakedefine HAVE_TIME 1
+ #cmakedefine HAVE_TIMES 1
+-#cmakedefine HAVE_UCONTEXT 1
++#cmakedefine HAVE_UCONTEXT_H 1
+ #cmakedefine HAVE_VALLOC 1
+ #cmakedefine HAVE_VIDATTR 1
+ #define HAVE_VIO_READ_BUFF 1
+diff --git a/include/my_context.h b/include/my_context.h
+index 1bf13fd..976ed98 100644
+--- a/include/my_context.h
++++ b/include/my_context.h
+@@ -31,7 +31,7 @@
+ #define MY_CONTEXT_USE_X86_64_GCC_ASM
+ #elif defined(__GNUC__) && __GNUC__ >= 3 && defined(__i386__)
+ #define MY_CONTEXT_USE_I386_GCC_ASM
+-#elif defined(HAVE_UCONTEXT)
++#elif defined(HAVE_UCONTEXT_H)
+ #define MY_CONTEXT_USE_UCONTEXT
+ #else
+ #define MY_CONTEXT_DISABLE

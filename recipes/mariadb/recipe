@@ -1,0 +1,105 @@
+parts=(
+  libmysqlclient libmysqlclient-devel
+  mariadb
+)
+version=10.1.10
+release=1
+sources=("http://mirror.one.com/mariadb/mariadb-${version}/source/mariadb-${version}.tar.gz")
+sha1sum=('a9f055d7845b6a4896ad5e2fd62cef8531eefb32')
+makedepends=(glibc-devel libssl-devel libcrypto-devel libcurl-devel libncurses-devel)
+
+config-libmysqlclient() {
+  description='MariaDB/MySQL client library'
+  depends=(glibc libssl libcrypto libcurl)
+  files=(
+    'usr/lib/libmysqlclient.so.*'
+    'usr/lib/libmysqlclient_r.so.*'
+    usr/lib/plugin/simple_password_check.so
+    usr/lib/plugin/locales.so
+    usr/lib/plugin/dialog_examples.so
+    usr/lib/plugin/auth_test_plugin.so
+    usr/lib/plugin/qa_auth_interface.so
+    usr/lib/plugin/qa_auth_server.so
+    usr/lib/plugin/qa_auth_client.so
+    usr/lib/plugin/auth_0x0100.so
+    usr/lib/plugin/mysql_clear_password.so
+    usr/lib/plugin/auth_socket.so
+    usr/lib/plugin/dialog.so
+  )
+}
+
+config-libmysqlclient-devel() {
+  description='MariaDB/MySQL client library (development files)'
+  depends=(glibc-devel libssl-devel libcrypto-devel libcurl-devel "libmysqlclient=$version-$release")
+  files=(
+    usr/lib/libmysqlclient.so
+    usr/lib/libmysqlclient_r.so
+    'usr/lib/libmysqlclient*.a'
+    'usr/include/mysql/**'
+    usr/bin/mysql_config
+  )
+}
+
+config-mariadb() {
+  description="MariaDB server"
+  depends=(glibc libssl libcrypto libcurl libncurses)
+  files=(
+    'usr/bin/*'
+    usr/scripts/mysql_install_db
+    'usr/lib/plugin/ha_*.so'
+    usr/lib/plugin/semisync_master.so
+    usr/lib/plugin/semisync_slave.so
+    usr/lib/plugin/libdaemon_example.so
+    usr/lib/plugin/daemon_example.ini
+    'usr/share/**'
+  )
+}
+
+# Cross-compilation instructions for MariaDB taken from here:
+#   https://lists.launchpad.net/maria-discuss/msg02911.html
+#   https://mariadb.com/kb/en/mariadb/cross-compiling-mariadb/
+
+CMAKE_FLAGS="-DWITHOUT_OQGRAPH=1 -DWITHOUT_SPHINX=1 -DWITHOUT_CASSANDRA=1 -DWITHOUT_SPIDER=1 -DWITHOUT_CONNECT=1 -DWITHOUT_INNOBASE=1 -DWITHOUT_TOKUDB=1 -DWITHOUT_MROONGA=1 -DWITH_EMBEDDED_SERVER=OFF -DWITH_WSREP=OFF"
+prepare() {
+  ( cd "mariadb-${version}" &&
+    patch -Np1 -i ../ucontext-fallback.patch
+  )
+
+  # First a couple tools need to be compiled host-side, used later during build.
+  mkdir -p native
+  cd native
+  cmake "../mariadb-${version}" $CMAKE_FLAGS
+  make import_executables
+}
+
+build() {
+  # Create toolchain file
+  cat > cross.cmake <<END
+SET(CMAKE_SYSTEM_NAME Linux)
+SET(CMAKE_SYSTEM_PROCESSOR $ARCH)
+SET(STACK_DIRECTION -1)
+SET(HAVE_IB_GCC_ATOMIC_BUILTINS 1)
+SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+END
+  cmake "../mariadb-${version}" \
+    -DCMAKE_TOOLCHAIN_FILE=cross.cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SYSTEM_NAME=Linux \
+    -DCMAKE_C_COMPILER="$HOST-gcc" \
+    -DCMAKE_CXX_COMPILER="$HOST-g++" \
+    -DIMPORT_EXECUTABLES="$(pwd)/../native/import_executables.cmake" \
+    -DCMAKE_FIND_ROOT_PATH="$SYSROOT" \
+    -DHAVE_FALLOC_PUNCH_HOLE_AND_KEEP_SIZE=1 \
+    -DWITH_SSL=system \
+    $CMAKE_FLAGS
+
+  make
+}
+
+package() {
+  make DESTDIR="$pkgdir" install
+}
+
+# vim: set ft=sh ts=2 sw=2 et:
