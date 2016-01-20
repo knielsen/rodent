@@ -2,11 +2,11 @@ version=master
 release=1
 sources=("https://github.com/knielsen/lem-mariadb/archive/${version}.tar.gz")
 sha1sum=('84b0e9bf4f47e6e56148c3002de8a2d0e5139662')
-makedepends=('lem-devel' 'libmariadb-devel')
+makedepends=(lem-devel libmysqlclient-devel)
 
 config-lem-mariadb() {
   description="Lua Event Machine"
-  depends=('lem' 'libmariadb')
+  depends=(lem libmysqlclient)
   files=(
     'usr/lib/lua/*/lem/mariadb.so' 'usr/share/lua/*/lem/mariadb/queued.lua'
   )
@@ -15,7 +15,7 @@ config-lem-mariadb() {
 build() {
   cd "../lem-mariadb-$version"
   make CC="$HOST-gcc -std=gnu99" MARIADB_CONFIG="true" \
-    CFLAGS="-O2 -I$SYSROOT/usr/include/mariadb -I$SYSROOT/usr/include/mariadb/mysql -lmariadb -lpthread -ldl -lm -lssl -lcrypto"
+    CFLAGS="-O2 -I$SYSROOT/usr/include/mysql -lmysqlclient -lpthread -ldl -lm -lssl -lcrypto"
 }
 
 package() {
