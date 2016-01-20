@@ -19,8 +19,9 @@ config-libmariadb() {
 }
 
 prepare() {
-  cd "mariadb-connector-c-$version"
+  cd "mariadb-connector-c-${version}"
   patch -Np1 -i ../32-bit-shift.patch 
+  patch -Np1 -i ../ucontext-fallback.patch
 }
 
 build() {
@@ -30,7 +31,7 @@ build() {
     -DCMAKE_C_COMPILER="$HOST-gcc" \
     -DCMAKE_FIND_ROOT_PATH="$SYSROOT" \
     -DCMAKE_BUILD_TYPE=Release \
-    "../mariadb-connector-c-$version/"
+    "../mariadb-connector-c-${version}/"
 
   make
 }
