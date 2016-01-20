@@ -36,7 +36,6 @@ config-superhamster() {
     'avahi-browse' 'libnss_mdns'
     'dosfstools-fsck'
     'lem'
-    'libmariadb'
     'lem-mariadb'
   )
   files=('**')
