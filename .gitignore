@@ -13,3 +13,4 @@
 /recipes/*/tools
 /recipes/*/sysroot.*
 /sysroot.*
+*~
