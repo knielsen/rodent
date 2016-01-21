@@ -1,7 +1,7 @@
-version=80f8678c55197b62872e90920fae3c2e72aff4fc
-release=1
-sources=("https://github.com/esmil/lem/archive/${version}.tar.gz")
-sha1sum=('7405d836e671058f734cb6fece039f092d45e6cc')
+version=af5f5471c9851fc79d9593e3278951629f4892d6
+release=2
+sources=("https://github.com/knielsen/lem/archive/${version}.tar.gz")
+sha1sum=('222cba70388d7ca9e7c962979611febe6cd883fc')
 makedepends=('glibc-devel')
 
 config-lem() {
