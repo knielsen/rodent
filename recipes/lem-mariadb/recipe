@@ -1,7 +1,7 @@
 version=master
-release=1
+release=2
 sources=("https://github.com/knielsen/lem-mariadb/archive/${version}.tar.gz")
-sha1sum=('84b0e9bf4f47e6e56148c3002de8a2d0e5139662')
+sha1sum=('0c5d0ba85fc9ca472e4d8f55f7c6e49fab0927d2')
 makedepends=(lem-devel libmysqlclient-devel)
 
 config-lem-mariadb() {
