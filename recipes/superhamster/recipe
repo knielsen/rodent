@@ -35,8 +35,13 @@ config-superhamster() {
     'pam_unix' 'pam_nologin'
     'avahi-browse' 'libnss_mdns'
     'dosfstools-fsck'
-    'lem'
-    'lem-mariadb'
+    'blipserver'
+    'vim'
+    'mkfifo'
+    'stty'
+    'ps'
+    'grep'
+    'free'
   )
   files=('**')
 }
