@@ -50,6 +50,7 @@ package() {
   cp -a "$srcdir/etc" "$pkgdir"
   cp -a "$srcdir/root" "$pkgdir"
   ln -s /usr/lib/systemd/systemd "$pkgdir/init"
+  chmod 600 "$pkgdir"/etc/ssh/ssh_host_*_key
 }
 
 # vim: set ft=sh ts=2 sw=2 et:
