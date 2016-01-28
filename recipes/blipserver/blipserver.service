@@ -10,7 +10,7 @@ WorkingDirectory=/usr/share/blipserver
 ExecStartPre=/bin/stty -F /dev/ttyACM0 raw -echo -hup cs8 parenb -cstopb 500000
 ExecStart=/usr/bin/lem /usr/share/blipserver/blip.lua
 Restart=always
-RestartSec=10s
+RestartSec=0
 
 [Install]
 Alias=multi-user.target.wants/blipserver.service
