@@ -1,7 +1,7 @@
 version=knpowermeter
-release=2
+release=3
 sources=("https://github.com/knielsen/blipserver/archive/${version}.tar.gz")
-sha1sum=('3621b8804e52fca833ebd55abf080121274492e4')
+sha1sum=('ccfa32d02f1a2ee25b2f7f87b9e13d4c38b63a7f')
 makedepends=(lem-devel lem-mariadb)
 
 config-blipserver() {
