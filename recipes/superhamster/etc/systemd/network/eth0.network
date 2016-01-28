@@ -2,4 +2,6 @@
 Name=eth0
 
 [Network]
-DHCP=v4
+Address=192.168.1.11/24
+Gateway=192.168.1.1
+DNS=192.168.1.7
